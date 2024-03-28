@@ -31,5 +31,6 @@ async def signin(sign_in_data: SignInSchema):
         return JSONResponse(status_code=400, content=jsonable_encoder({"detail": e.errors()}))
     
     except Exception as e:
+        if e.__class__.__name__ == "AuthApiError":
+            return JSONResponse(status_code=401, content=jsonable_encoder({"detail": str(e)}))
         return JSONResponse(status_code=500, content=jsonable_encoder({"detail": str(e)}))
-    
