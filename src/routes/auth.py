@@ -11,7 +11,19 @@ auth_router = APIRouter()
 @auth_router.post("/signup", tags=["Authentication"])
 async def signup(sign_up_data: SignUpSchema):
     try:
-        user_created = supa.auth.sign_up(credentials=sign_up_data.model_dump())
+        user_created = supa.auth.sign_up(credentials={
+            "email": sign_up_data.email,
+            "password": sign_up_data.password,
+            "options": {
+                "data": {
+                    "first_name": sign_up_data.first_name,
+                    "last_name": sign_up_data.last_name,
+                    "email_verified": True,
+                    "business_name": sign_up_data.business_name.capitalize(),
+                    "parking_fee_per_minute": sign_up_data.parking_fee_per_minute
+                }
+            }
+        })
         return JSONResponse(status_code=201, content=jsonable_encoder(user_created))
     
     except RequestValidationError as e:
