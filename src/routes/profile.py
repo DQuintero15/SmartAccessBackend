@@ -8,4 +8,5 @@ profile_router = APIRouter()
 
 @profile_router.get("", tags=["Profile"], dependencies = [Depends(JWTBearer())])
 async def get_profile() -> UserProfileSchema:
+    print(supa.auth.get_user())
     return supa.auth.get_user().user.user_metadata

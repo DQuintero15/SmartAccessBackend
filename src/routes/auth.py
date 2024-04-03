@@ -21,6 +21,7 @@ async def signup(sign_up_data: SignUpSchema):
                     "email_verified": True,
                     "business_name": sign_up_data.business_name.capitalize(),
                     "parking_fee_per_minute": sign_up_data.parking_fee_per_minute,
+                    "role": sign_up_data.role
                 }
             }
         })
