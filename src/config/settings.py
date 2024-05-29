@@ -4,8 +4,12 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     database_url: str
-    supabase_url: str
-    supabase_key: str
+    firebase_credential_path: str
+    postgres_user: str
+    postgres_password: str
+    postgres_db: str
+    basic_auth_user: str
+    basic_auth_password: str
     
     class Config:
         env_file = ".env"
